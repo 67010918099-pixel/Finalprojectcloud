@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="สรุปเทคโนโลยี Cloud Computing และบริการของ Alibaba Cloud">
+<title>Cloud Computing | Alibaba Cloud</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&family=Sarabun:wght@300;400;500;600;700&display=swap');
+:root{--navy:#10243a;--blue:#1769aa;--cyan:#26a6b8;--orange:#ff8b38;--cream:#f6f8fb;--ink:#243447;--muted:#627286;--card:#fff;--line:#e3eaf1;--shadow:0 12px 32px rgba(19,47,76,.08)}
+*{box-sizing:border-box;scroll-behavior:smooth}
+body{margin:0;font-family:'Sarabun','Prompt',sans-serif;background:var(--cream);color:var(--ink);line-height:1.85}
+a{color:var(--blue);text-decoration:none}
+a:hover{text-decoration:underline}
+.topbar{position:sticky;top:0;z-index:100;background:rgba(16,36,58,.97);color:#fff;box-shadow:0 4px 18px #0b1b2b30}
+.top-inner{max-width:1400px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:12px 22px}
+.brand{display:flex;align-items:center;gap:12px;font-family:'Prompt',sans-serif;font-weight:600;letter-spacing:.2px}
+.brand-mark{display:grid;place-items:center;width:42px;height:42px;border-radius:13px;background:linear-gradient(135deg,var(--orange),#ffbf69);color:#10243a;font-size:21px;font-weight:700}
+.brand small{display:block;font-family:'Sarabun';font-weight:300;font-size:12px;color:#b9cde0}
+.top-actions{display:flex;align-items:center;gap:9px}
+.btn{border:1px solid #ffffff45;color:#fff;background:#ffffff12;padding:8px 13px;border-radius:10px;font-family:inherit;cursor:pointer}
+.btn:hover{background:#ffffff25}
+.layout{max-width:1400px;margin:auto;display:grid;grid-template-columns:285px minmax(0,1fr);gap:25px;padding:25px 22px}
+.sidebar{position:sticky;top:86px;align-self:start;max-height:calc(100vh - 110px);overflow:auto;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px 13px;box-shadow:var(--shadow)}
+.side-heading{padding:0 12px 10px;font-family:'Prompt';font-weight:600;color:var(--navy)}
+.nav-link,.nav-toggle{width:100%;display:flex;justify-content:space-between;align-items:center;gap:8px;border:0;background:transparent;text-align:left;padding:9px 12px;border-radius:10px;font:inherit;font-size:14px;color:#42556a;cursor:pointer}
+.nav-link:hover,.nav-toggle:hover{background:#eef6fc;color:var(--blue);text-decoration:none}
+.nav-link.active{background:#e6f4fb;color:#075c92;font-weight:700}
+.nav-group{margin:2px 0}
+.nav-sub{padding-left:13px;display:none}
+.nav-group.open .nav-sub{display:block}
+.chev{transition:transform .2s;font-size:12px}
+.nav-group.open .chev{transform:rotate(180deg)}
+main{min-width:0}
+.hero{position:relative;overflow:hidden;border-radius:24px;padding:clamp(25px,5vw,58px);background:linear-gradient(120deg,#10243a 0%,#145a86 57%,#20a2ad 100%);color:#fff;box-shadow:var(--shadow)}
+.hero:after{content:"";position:absolute;width:340px;height:340px;border:1px solid #ffffff25;border-radius:50%;right:-85px;top:-120px;box-shadow:0 0 0 38px #ffffff08,0 0 0 78px #ffffff06}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;color:#ffcc99;background:#ffffff13;border:1px solid #ffffff30;border-radius:99px;padding:5px 12px;font-size:13px}
+.hero h1{font-family:'Prompt';font-size:clamp(30px,4.5vw,52px);line-height:1.25;margin:18px 0 12px;max-width:800px}
+.hero p{max-width:720px;color:#e0edf7;font-size:17px;margin:0 0 24px}
+.hero-buttons{display:flex;flex-wrap:wrap;gap:10px}
+.hero .primary{background:var(--orange);border:0;color:#1b2b3c;font-weight:700}
+.hero .secondary{background:#ffffff12}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin:20px 0 28px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:var(--shadow)}
+.stat strong{display:block;font:600 22px 'Prompt';color:var(--blue)}
+.stat span{font-size:13px;color:var(--muted)}
+.section{scroll-margin-top:95px;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:clamp(20px,3.2vw,34px);margin:0 0 22px;box-shadow:var(--shadow)}
+.section-head{display:flex;align-items:flex-start;gap:14px;margin-bottom:18px}
+.section-icon{flex:0 0 48px;width:48px;height:48px;display:grid;place-items:center;border-radius:15px;background:#e7f5fb;color:var(--blue);font-size:23px}
+.section h2{font-family:'Prompt';font-size:clamp(22px,2.8vw,30px);line-height:1.4;margin:0;color:var(--navy)}
+.section h3{font-family:'Prompt';font-size:19px;color:#145b86;margin:26px 0 8px}
+.lead{color:#53687d;font-size:16px;margin:6px 0 0}
+p{margin:10px 0}
+.image-frame{margin:22px 0;border-radius:17px;overflow:hidden;border:1px solid var(--line);background:#f5f8fb}
+.image-frame img{display:block;width:100%;height:auto;max-height:420px;object-fit:contain}
+.image-caption{padding:8px 13px;font-size:12px;color:var(--muted);background:#f8fafc}
+.feature-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:18px 0}
+.feature{border:1px solid var(--line);border-radius:15px;padding:17px;background:linear-gradient(145deg,#fff,#f8fbfd)}
+.feature h4{margin:0 0 7px;color:var(--navy);font:600 16px 'Prompt'}
+.feature p{margin:0;font-size:14px;color:#52667a}
+.pros-cons{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px;margin-top:18px}
+.pc{border-radius:16px;padding:18px;border:1px solid var(--line)}
+.pc.good{background:#f0faf5;border-color:#d4eee0}
+.pc.bad{background:#fff6f1;border-color:#f7dfd1}
+.pc h3{margin:0 0 10px;font-size:18px;color:#176f50}
+.pc.bad h3{color:#b65a2b}
+ol,ul{padding-left:25px;margin:8px 0}
+li{padding:3px 0}
+.callout{border-left:4px solid var(--cyan);background:#eff9fb;padding:14px 17px;border-radius:0 12px 12px 0;margin:18px 0;color:#31556a}
+.compare{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px}
+.compare th,.compare td{border:1px solid var(--line);padding:11px;text-align:left;vertical-align:top}
+.compare th{background:#eaf5fb;color:#123d5b}
+.compare tr:nth-child(even) td{background:#fafcfe}
+.people{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.person{border:1px solid var(--line);padding:14px;border-radius:13px;background:#fbfdff}
+.person strong{display:block;color:var(--navy)}
+.person span{font-size:13px;color:var(--muted)}
+.course-meta{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:18px}
+.meta-box{padding:16px;border-radius:14px;background:#f1f7fb;border:1px solid #deebf4}
+.meta-box b{display:block;color:#145b86;margin-bottom:4px}
+.footer{text-align:center;color:#708196;padding:25px 10px 40px;font-size:13px}
+.backtop{position:fixed;right:22px;bottom:22px;border:0;border-radius:50%;width:45px;height:45px;background:var(--orange);color:#172b3d;font-size:20px;box-shadow:0 6px 20px #0002;cursor:pointer;display:none}
+.backtop.show{display:block}
+.searchbox{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:10px;font:inherit;margin:0 0 12px;background:#fbfdff}
+.mobile-menu{display:none}
+body.dark{--cream:#101923;--ink:#e6edf5;--muted:#a7b7c8;--card:#182635;--line:#2b3c4d;--navy:#e8f3ff;--shadow:0 12px 32px #0002}
+body.dark .sidebar,body.dark .section,body.dark .stat{background:var(--card)}
+body.dark .nav-link,body.dark .nav-toggle{color:#c2d1df}
+body.dark .nav-link:hover,body.dark .nav-toggle:hover,body.dark .nav-link.active{background:#233d51;color:#9ddcff}
+body.dark .feature{background:#1b2b3a}
+body.dark .feature p,body.dark .lead,body.dark .pc,body.dark .compare td{color:#d6e0e9}
+body.dark .pc.good{background:#163329}.dark .pc.bad{background:#3a2922}
+body.dark .callout{background:#183440;color:#d9f3fa}
+body.dark .image-caption{background:#1a2a39}
+@media(max-width:900px){.layout{grid-template-columns:1fr;padding:16px}.sidebar{position:fixed;z-index:120;top:68px;left:12px;bottom:12px;width:min(310px,calc(100vw - 24px));max-height:none;transform:translateX(calc(-100% - 20px));transition:transform .25s}.sidebar.show{transform:translateX(0)}.mobile-menu{display:inline-block}.stats{grid-template-columns:repeat(2,1fr)}.top-inner{padding:10px 14px}.brand{font-size:14px}}
+@media(max-width:600px){.top-actions .btn:not(.mobile-menu){padding:7px 9px;font-size:12px}.brand small{display:none}.brand-mark{width:36px;height:36px}.hero{border-radius:18px}.feature-grid,.pros-cons,.people,.course-meta{grid-template-columns:1fr}.section{border-radius:16px}.compare{font-size:12px}.compare th,.compare td{padding:7px}.stats{gap:9px}.stat{padding:12px}.stat strong{font-size:19px}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <div class="top-inner">
+    <div class="brand"><div class="brand-mark">☁</div><div>Cloud Computing<small>Alibaba Cloud · Learning Hub</small></div></div>
+    <div class="top-actions">
+      <button class="btn mobile-menu" id="menuBtn" aria-label="เปิดเมนู">☰ เมนู</button>
+      <button class="btn" id="themeBtn" aria-label="เปลี่ยนธีม">◐ ธีม</button>
+      <button class="btn" onclick="window.print()">⎙ พิมพ์</button>
+    </div>
+  </div>
+</header>
+
+<div class="layout">
+<aside class="sidebar" id="sidebar">
+  <div class="side-heading">สารบัญเว็บไซต์</div>
+  <input class="searchbox" id="navSearch" type="search" placeholder="ค้นหาหัวข้อ..." aria-label="ค้นหาหัวข้อ">
+  <a class="nav-link active" href="#home">⌂ ภาพรวม</a>
+  <div class="nav-group open">
+    <button class="nav-toggle">☁ Cloud Services <span class="chev">⌄</span></button>
+    <div class="nav-sub">
+      <a class="nav-link" href="#iaas">IaaS</a>
+      <a class="nav-link" href="#caas">CaaS</a>
+      <a class="nav-link" href="#paas">PaaS</a>
+      <a class="nav-link" href="#faas">FaaS</a>
+      <a class="nav-link" href="#daas">DaaS</a>
+    </div>
+  </div>
+  <div class="nav-group open">
+    <button class="nav-toggle">🛡 Security & Identity <span class="chev">⌄</span></button>
+    <div class="nav-sub"><a class="nav-link" href="#security">Zero Trust & IDaaS</a></div>
+  </div>
+  <a class="nav-link" href="#comparison">▤ ตารางเปรียบเทียบ</a>
+  <a class="nav-link" href="#authors">♙ ผู้จัดทำ</a>
+  <a class="nav-link" href="#course">▣ รายวิชาและอาจารย์</a>
+</aside>
+
+<main>
+<section class="hero" id="home">
+  <span class="eyebrow">✦ CLOUD TECHNOLOGY · ALIBABA CLOUD</span>
+  <h1>รู้จักบริการคลาวด์<br>ตั้งแต่โครงสร้างพื้นฐานถึงความปลอดภัย</h1>
+  <p>เรียนรู้แนวคิดและตัวอย่างบริการของ Alibaba Cloud ผ่านเนื้อหา IaaS, CaaS, PaaS, FaaS, DaaS รวมถึง Security & Identity พร้อมข้อดี ข้อจำกัด และแนวทางเลือกใช้งาน</p>
+  <div class="hero-buttons">
+    <a class="btn primary" href="#iaas">เริ่มเรียนรู้ ↓</a>
+    <a class="btn secondary" href="#comparison">ดูตารางเปรียบเทียบ</a>
+  </div>
+</section>
+<div class="stats">
+  <div class="stat"><strong>5 รูปแบบ</strong><span>บริการคลาวด์ที่อธิบาย</span></div>
+  <div class="stat"><strong>Alibaba Cloud</strong><span>ตัวอย่างบริการจากผู้ให้บริการ</span></div>
+  <div class="stat"><strong>Security</strong><span>ตัวตนและสิทธิ์การเข้าถึง</span></div>
+  <div class="stat"><strong>Practical</strong><span>ข้อดี ข้อจำกัด และตัวอย่าง</span></div>
+</div>
+
+<section class="section" id="iaas">
+  <div class="section-head"><div class="section-icon">🖥️</div><div><h2>1. IaaS — Infrastructure as a Service</h2><p class="lead">โครงสร้างพื้นฐานในรูปแบบบริการ</p></div></div>
+  <h3>ความหมายของ IaaS</h3>
+  <p>Infrastructure as a Service (IaaS) หรือ โครงสร้างพื้นฐานในรูปแบบบริการ เป็นรูปแบบการให้บริการคลาวด์คอมพิวติ้งที่ผู้ให้บริการจัดเตรียมทรัพยากรด้านเทคโนโลยีสารสนเทศผ่านอินเทอร์เน็ต เช่น เซิร์ฟเวอร์เสมือน พื้นที่จัดเก็บข้อมูล ระบบเครือข่าย และทรัพยากรประมวลผล ผู้ใช้งานสามารถเลือกขนาดและกำหนดค่าทรัพยากรให้เหมาะสมกับลักษณะงาน โดยไม่จำเป็นต้องซื้อ ติดตั้ง และดูแลเครื่องเซิร์ฟเวอร์จริงทั้งหมดด้วยตนเอง</p>
+  <p>IaaS ช่วยให้องค์กรเริ่มต้นใช้งานระบบสารสนเทศได้รวดเร็วขึ้น ลดการลงทุนในฮาร์ดแวร์ และปรับเพิ่มหรือลดทรัพยากรได้ตามปริมาณงาน อย่างไรก็ตาม ผู้ใช้ยังต้องดูแลส่วนที่อยู่ภายใต้ความรับผิดชอบของตน เช่น ระบบปฏิบัติการ การติดตั้งซอฟต์แวร์ และการรักษาความปลอดภัยของแอปพลิเคชัน</p>
+  <div class="image-frame"><img src="https://staging123.ivolve.io/wp-content/uploads/2024/06/Alibaba-3.jpg" alt="ภาพประกอบ Alibaba Cloud" loading="lazy" onerror="this.parentElement.style.display='none'"><div class="image-caption">ภาพประกอบ Alibaba Cloud</div></div>
+  <h3>IaaS ของ Alibaba Cloud: Elastic Compute Service (ECS)</h3>
+  <p>Elastic Compute Service (ECS) เป็นบริการเซิร์ฟเวอร์เสมือนบนคลาวด์ของ Alibaba Cloud ที่ช่วยให้ผู้ใช้สร้างและจัดการเครื่องประมวลผลเสมือนได้ตามต้องการ สามารถเลือกรูปแบบเครื่อง จำนวน CPU หน่วยความจำ และการตั้งค่าที่เหมาะสมกับแอปพลิเคชัน ECS สอดคล้องกับ IaaS โดยตรง เพราะผู้ใช้ควบคุมการตั้งค่าระบบปฏิบัติการและซอฟต์แวร์ที่ติดตั้งบนอินสแตนซ์ได้ ขณะที่ Alibaba Cloud จัดเตรียมโครงสร้างพื้นฐานทางกายภาพและระบบเสมือนให้บริการ</p>
+  <p>บริการประมวลผลของ Alibaba Cloud ยังมีตัวเลือกอื่นตามประเภทของงาน เช่น ระบบประมวลผลประสิทธิภาพสูงและเครื่องที่ออกแบบมาเพื่อรองรับงานเฉพาะทาง ผู้ใช้ควรเลือกทรัพยากรจากความต้องการด้านประสิทธิภาพ งบประมาณ และรูปแบบการใช้งานเป็นหลัก</p>
+  <div class="pros-cons">
+    <div class="pc good"><h3>✓ ข้อดีของ IaaS</h3><ol><li>ไม่จำเป็นต้องซื้อเซิร์ฟเวอร์และอุปกรณ์เครือข่ายทั้งหมดด้วยตนเอง</li><li>เลือกและปรับขนาดเครื่องให้สอดคล้องกับความต้องการของระบบได้</li><li>สร้างเซิร์ฟเวอร์เสมือนเพื่อพัฒนาและติดตั้งระบบได้รวดเร็ว</li><li>เลือกระบบปฏิบัติการ ซอฟต์แวร์ และการตั้งค่าตามขอบเขตบริการ</li><li>รองรับตั้งแต่เว็บไซต์ทั่วไปจนถึงระบบองค์กรและงานประมวลผลสูง</li><li>เลือกกำลังประมวลผลให้สอดคล้องกับงบประมาณได้</li></ol></div>
+    <div class="pc bad"><h3>! ข้อเสียของ IaaS</h3><ol><li>ผู้ใช้อาจต้องดูแลระบบปฏิบัติการ ซอฟต์แวร์ และการอัปเดต</li><li>ค่าใช้จ่ายอาจสูงขึ้นหากเปิดทรัพยากรทิ้งไว้หรือเลือกเครื่องใหญ่เกินจำเป็น</li><li>ต้องตั้งค่าสิทธิ์ รหัสผ่าน เครือข่าย และการสำรองข้อมูล</li><li>ทรัพยากรไม่เพียงพออาจทำให้เว็บไซต์หรือแอปพลิเคชันช้าลง</li><li>เซิร์ฟเวอร์เพียงเครื่องเดียวอาจทำให้ระบบหยุดเมื่อเกิดปัญหา จึงควรวางแผนสำรองตามความสำคัญของงาน</li></ol></div>
+  </div>
+</section>
+
+<section class="section" id="caas">
+  <div class="section-head"><div class="section-icon">📦</div><div><h2>2. CaaS — Container as a Service</h2><p class="lead">คอนเทนเนอร์ในรูปแบบบริการ</p></div></div>
+  <h3>ความหมายของ CaaS</h3>
+  <p>Container as a Service (CaaS) เป็นบริการคลาวด์ที่ช่วยให้ผู้ใช้สร้าง ปรับใช้ จัดการ และขยายแอปพลิเคชันที่ทำงานภายในคอนเทนเนอร์ผ่านระบบคลาวด์ โดยผู้ให้บริการจัดเตรียมเครื่องมือและทรัพยากรที่จำเป็นสำหรับการทำงานของคอนเทนเนอร์</p>
+  <p>คอนเทนเนอร์ (Container) เป็นเทคโนโลยีที่ใช้บรรจุแอปพลิเคชัน ไลบรารี และส่วนประกอบที่จำเป็นไว้ด้วยกัน ทำให้แอปพลิเคชันทำงานในสภาพแวดล้อมที่รองรับได้อย่างสม่ำเสมอ ตัวอย่างเทคโนโลยีที่เกี่ยวข้อง ได้แก่ Docker และ Kubernetes</p>
+  <p>CaaS ช่วยลดภาระในการจัดการระบบคอนเทนเนอร์ ทำให้ติดตั้งแอปพลิเคชันสะดวก เพิ่มความยืดหยุ่นในการจัดสรรทรัพยากร และรองรับการขยายระบบตามปริมาณการใช้งาน อย่างไรก็ตาม ผู้ใช้ยังต้องรับผิดชอบการตั้งค่าแอปพลิเคชัน ข้อมูล และความปลอดภัยตามขอบเขตบริการ</p>
+  <div class="image-frame"><img src="https://help-static-aliyun-doc.aliyuncs.com/assets/img/en-US/5441345461/p390269.png" alt="ภาพประกอบบริการคอนเทนเนอร์ของ Alibaba Cloud" loading="lazy" onerror="this.parentElement.style.display='none'"><div class="image-caption">ภาพประกอบแนวคิดบริการคอนเทนเนอร์ของ Alibaba Cloud</div></div>
+  <h3>CaaS ของ Alibaba Cloud</h3>
+  <div class="feature-grid">
+    <div class="feature"><h4>01 · Container Compute Service (ACS)</h4><p>บริการประมวลผลคอนเทนเนอร์ที่รองรับ Kubernetes ในรูปแบบ Serverless ช่วยให้เรียกใช้ทรัพยากรประมวลผลสำหรับ Pod โดยไม่จำเป็นต้องบริหารจัดการโหนดพื้นฐานด้วยตนเอง เหมาะกับเว็บแอปพลิเคชัน ไมโครเซอร์วิส และงานที่มีปริมาณเปลี่ยนแปลง</p></div>
+    <div class="feature"><h4>02 · Container Service for Kubernetes (ACK)</h4><p>บริการจัดการคลัสเตอร์ Kubernetes ช่วยติดตั้ง ปรับใช้ จัดการ และขยายแอปพลิเคชันในคอนเทนเนอร์ เหมาะกับองค์กรที่ต้องบริหารแอปพลิเคชันหลายส่วนหรือหลายบริการร่วมกัน</p></div>
+  </div>
+  <div class="callout"><b>ความแตกต่าง:</b> ACS มุ่งเน้นการใช้ทรัพยากรประมวลผลคอนเทนเนอร์โดยลดภาระจัดการโครงสร้างพื้นฐาน ส่วน ACK มุ่งเน้นการจัดการคลัสเตอร์ Kubernetes ซึ่งมีแนวทางบริหารโครงสร้างพื้นฐานให้เลือกตามรูปแบบบริการ</div>
+  <div class="pros-cons">
+    <div class="pc good"><h3>✓ ข้อดีของ CaaS</h3><ol><li>บริการที่มีการจัดการช่วยลดงานดูแลคอนเทนเนอร์และโหนด โดยเฉพาะแบบ Serverless</li><li>เพิ่มหรือลดทรัพยากรตามความต้องการของแอปพลิเคชัน</li><li>ช่วยให้โปรแกรมทำงานสม่ำเสมอในสภาพแวดล้อมที่รองรับ</li><li>แบ่งแอปพลิเคชันเป็นบริการย่อยและปรับปรุงแต่ละส่วนได้</li><li>เหมาะกับเว็บไซต์ ไมโครเซอร์วิส และงานประมวลผลข้อมูล</li><li>กำหนดทรัพยากรให้เหมาะกับแต่ละแอปพลิเคชันได้</li><li>เชื่อมต่อกับระบบซอร์สโค้ดและ CI/CD เพื่อจัดระเบียบการทดสอบและเผยแพร่โปรแกรม</li></ol></div>
+    <div class="pc bad"><h3>! ข้อเสียของ CaaS</h3><ol><li>ต้องมีความเข้าใจเรื่องคอนเทนเนอร์ Kubernetes และการแก้ปัญหา</li><li>ค่าใช้จ่ายอาจเพิ่มจากการประมวลผล เครือข่าย พื้นที่จัดเก็บ และบริการเสริม</li><li>ต้องออกแบบเครือข่าย การเชื่อมต่อ และการจัดเก็บข้อมูลให้เหมาะสม</li><li>ต้องคำนึงถึงช่องโหว่ของ Container Image และการกำหนดสิทธิ์</li><li>CPU หรือหน่วยความจำไม่พออาจทำให้แอปช้าหรือหยุดทำงาน</li><li>การใช้บริการเฉพาะของผู้ให้บริการอาจทำให้ย้ายคลาวด์ซับซ้อนขึ้น</li></ol></div>
+  </div>
+</section>
+
+<section class="section" id="paas">
+  <div class="section-head"><div class="section-icon">🧰</div><div><h2>3. PaaS — Platform as a Service</h2><p class="lead">แพลตฟอร์มในรูปแบบบริการ</p></div></div>
+  <h3>ความหมายของ PaaS</h3>
+  <p>PaaS คือบริการคลาวด์ที่ให้ผู้ใช้งานพัฒนา ทดสอบ ติดตั้ง และดูแลแอปพลิเคชันผ่านแพลตฟอร์มที่ผู้ให้บริการจัดเตรียมไว้ โดยไม่จำเป็นต้องจัดการโครงสร้างพื้นฐานทั้งหมดด้วยตนเอง เช่น เซิร์ฟเวอร์จริง ระบบปฏิบัติการ และการตั้งค่าระบบพื้นฐานบางส่วน</p>
+  <p>PaaS เหมาะสำหรับนักพัฒนาเว็บไซต์ นักพัฒนาแอปพลิเคชัน และองค์กรที่ต้องการลดความซับซ้อนในการดูแลระบบ เพื่อให้มุ่งเน้นการเขียนโปรแกรมและพัฒนาฟังก์ชันได้มากขึ้น ตัวอย่างเช่น เว็บไซต์ขายสินค้าออนไลน์สามารถใช้ PaaS เพื่อนำแอปขึ้นใช้งาน จัดการสภาพแวดล้อม และรองรับการปรับขนาดตามจำนวนผู้ใช้ โดยไม่ต้องดูแลเซิร์ฟเวอร์ทุกส่วนเอง</p>
+  <h3>บริการที่เกี่ยวข้องกับ Alibaba Cloud</h3>
+  <div class="feature-grid">
+    <div class="feature"><h4>Serverless App Engine (SAE)</h4><p>แพลตฟอร์มสำหรับติดตั้งและบริหารจัดการแอปพลิเคชัน ช่วยลดภาระจัดการโครงสร้างพื้นฐาน สามารถกำหนดการปรับขนาดทรัพยากรตามความต้องการ เหมาะกับเว็บแอปและระบบไมโครเซอร์วิส</p></div>
+    <div class="feature"><h4>Function Compute (FC)</h4><p>บริการประมวลผลแบบ Serverless ที่เรียกใช้โค้ดเมื่อเกิดเหตุการณ์หรือคำขอ โดยไม่ต้องบริหารเซิร์ฟเวอร์โดยตรง โดยทั่วไป FC จัดอยู่ในกลุ่ม FaaS แต่เกี่ยวข้องกับแนวทางพัฒนาแอปพลิเคชันบนคลาวด์ด้วย</p></div>
+  </div>
+  <div class="pros-cons">
+    <div class="pc good"><h3>✓ ข้อดีของ PaaS</h3><ol><li>ไม่ต้องจัดการโครงสร้างพื้นฐานทุกส่วนเอง</li><li>ใช้แพลตฟอร์มและเครื่องมือที่เตรียมไว้แล้ว</li><li>ปรับจำนวนอินสแตนซ์ตามปริมาณใช้งานได้ในบริการที่รองรับ</li><li>มีเครื่องมือตรวจสอบและติดตามแอปพลิเคชัน</li><li>ไม่จำเป็นต้องซื้อเซิร์ฟเวอร์จริง</li><li>เชื่อมต่อเครื่องมือส่งโค้ดและติดตั้งเวอร์ชันใหม่ได้</li></ol></div>
+    <div class="pc bad"><h3>! ข้อเสียของ PaaS</h3><ol><li>ปรับแต่งทุกส่วนได้ไม่อิสระเท่าการดูแลเซิร์ฟเวอร์เอง</li><li>ต้องติดตามต้นทุนทรัพยากร บริการเสริม และการรับส่งข้อมูล</li><li>ต้องเข้าใจการตั้งค่าและขั้นตอนนำแอปขึ้นใช้งาน</li><li>พึ่งพาเครื่องมือเฉพาะแพลตฟอร์มอาจทำให้ย้ายระบบยากขึ้น</li><li>ผู้ใช้ยังต้องดูแลสิทธิ์ ข้อมูล และการตั้งค่าของแอปพลิเคชัน</li><li>ข้อจำกัดด้านภาษา เครื่องมือ หรือรูปแบบติดตั้งอาจไม่เหมาะกับบางระบบ</li></ol></div>
+  </div>
+</section>
+
+<section class="section" id="faas">
+  <div class="section-head"><div class="section-icon">⚡</div><div><h2>4. FaaS — Function as a Service</h2><p class="lead">ฟังก์ชันในรูปแบบบริการ</p></div></div>
+  <h3>ความหมายของ FaaS</h3>
+  <p>FaaS เป็นรูปแบบหนึ่งของ Cloud Computing ที่ช่วยให้นักพัฒนาเขียนและเรียกใช้โค้ดเป็นฟังก์ชันย่อย ๆ โดยไม่จำเป็นต้องจัดการเซิร์ฟเวอร์ด้วยตนเอง ผู้ให้บริการคลาวด์ดูแลโครงสร้างพื้นฐานและจัดสรรทรัพยากรสำหรับประมวลผลตามการทำงานของฟังก์ชัน</p>
+  <p>FaaS มักทำงานร่วมกับแนวคิด Serverless Computing ซึ่งไม่ได้หมายความว่าไม่มีเซิร์ฟเวอร์อยู่จริง แต่หมายถึงผู้ใช้ไม่ต้องบริหารจัดการเซิร์ฟเวอร์โดยตรง ฟังก์ชันสามารถทำงานเมื่อมีเหตุการณ์หรือคำขอ เช่น การอัปโหลดไฟล์ การส่งคำสั่งซื้อ หรือการเรียก API</p>
+  <div class="callout"><b>ตัวอย่างการใช้งาน:</b> เว็บไซต์ขายสินค้าออนไลน์สามารถเรียกฟังก์ชันส่งอีเมลยืนยันคำสั่งซื้อเมื่อระบบได้รับเหตุการณ์ว่าลูกค้าชำระเงินสำเร็จ แทนการเปิดเซิร์ฟเวอร์แยกเพื่อทำงานนี้ตลอดเวลา</div>
+  <h3>บริการ FaaS ของ Alibaba Cloud: Function Compute (FC)</h3>
+  <p>Function Compute เป็นบริการประมวลผลแบบ Serverless ของ Alibaba Cloud ที่ช่วยให้ผู้ใช้พัฒนาและเรียกใช้โค้ดตามเหตุการณ์หรือคำขอ โดยไม่ต้องดูแลเซิร์ฟเวอร์พื้นฐานด้วยตนเอง รองรับงานที่เกี่ยวข้องกับ API การประมวลผลข้อมูล และการตอบสนองต่อเหตุการณ์จากบริการอื่น</p>
+  <div class="pros-cons">
+    <div class="pc good"><h3>✓ ข้อดีของ FaaS</h3><ol><li>ผู้ให้บริการจัดการโครงสร้างพื้นฐานสำหรับประมวลผล</li><li>คิดค่าบริการตามการใช้งานในรูปแบบที่บริการกำหนด หากไม่มีการใช้ทรัพยากรประมวลผลอาจไม่มีค่าใช้จ่ายส่วนนั้น แต่ต้องตรวจสอบค่าใช้จ่ายอื่น</li><li>เพิ่มหรือลดทรัพยากรตามภาระงานภายในขีดจำกัดบริการ</li><li>นักพัฒนามุ่งเน้นการเขียนโค้ดแก้ปัญหาทางธุรกิจ</li><li>ตั้งให้ฟังก์ชันทำงานเมื่อเกิดเหตุการณ์ตามเงื่อนไข</li><li>ใช้กับ API การประมวลผลไฟล์ วิดีโอ ข้อมูล และ AI ได้</li></ol></div>
+    <div class="pc bad"><h3>! ข้อเสียของ FaaS</h3><ol><li>บางกรณีต้องเตรียมอินสแตนซ์ก่อน จึงเพิ่มเวลาตอบสนองได้</li><li>มีข้อกำหนดด้านเวลา หน่วยความจำ และการประมวลผล</li><li>เมื่อมีฟังก์ชันจำนวนมาก การติดตามปัญหาข้ามบริการอาจยาก</li><li>การใช้บริการเฉพาะคลาวด์อาจทำให้ย้ายผู้ให้บริการซับซ้อน</li><li>การเรียกบ่อย ใช้ทรัพยากรสูง หรือรับส่งข้อมูลมาก อาจทำให้ค่าใช้จ่ายสูง</li><li>งานที่ต้องทำต่อเนื่องนานหรือมีสถานะซับซ้อนอาจต้องใช้บริการอื่นร่วมด้วย</li></ol></div>
+  </div>
+</section>
+
+<section class="section" id="daas">
+  <div class="section-head"><div class="section-icon">🗄️</div><div><h2>5. DaaS — Database as a Service</h2><p class="lead">ฐานข้อมูลในรูปแบบบริการ</p></div></div>
+  <h3>ความหมายของ DaaS</h3>
+  <p>Database as a Service (DaaS) ในบริบทนี้หมายถึงบริการฐานข้อมูลผ่านระบบคลาวด์ ผู้ใช้งานสามารถสร้าง จัดเก็บ ประมวลผล และจัดการข้อมูลผ่านอินเทอร์เน็ต โดยไม่จำเป็นต้องลงทุนติดตั้งเซิร์ฟเวอร์ฐานข้อมูลและดูแลโครงสร้างพื้นฐานทั้งหมดด้วยตนเอง ผู้ให้บริการรับผิดชอบการจัดการทรัพยากรและสนับสนุนการบำรุงรักษาตามขอบเขตบริการที่เลือกใช้</p>
+  <p>Alibaba Cloud มีบริการฐานข้อมูลหลายประเภท รองรับตั้งแต่การจัดเก็บข้อมูลทั่วไป การประมวลผลธุรกรรม ไปจนถึงการวิเคราะห์ข้อมูลขนาดใหญ่ โดยมีผลิตภัณฑ์สำคัญ ได้แก่ ApsaraDB RDS, PolarDB และ AnalyticDB</p>
+  <h3>บริการ DaaS ของ Alibaba Cloud</h3>
+  <div class="feature-grid">
+    <div class="feature"><h4>01 · ApsaraDB RDS</h4><p>บริการฐานข้อมูลเชิงสัมพันธ์บนคลาวด์ รองรับระบบฐานข้อมูลหลายชนิด เช่น MySQL, PostgreSQL, SQL Server และ MariaDB ตามผลิตภัณฑ์และรุ่นที่ให้บริการ ข้อมูลจัดเก็บในรูปแบบตารางที่เชื่อมโยงกันได้ เหมาะกับเว็บไซต์ ระบบซื้อขายสินค้า ระบบสมาชิก และระบบองค์กร มีเครื่องมือสนับสนุนการสำรองและกู้คืนข้อมูล การตรวจสอบประสิทธิภาพ และความพร้อมใช้งาน</p></div>
+    <div class="feature"><h4>02 · PolarDB</h4><p>บริการฐานข้อมูลบนคลาวด์ที่ออกแบบมาสำหรับงานประสิทธิภาพสูงและการขยายระบบตามปริมาณการใช้งาน รองรับรูปแบบที่เข้ากันได้กับ MySQL, PostgreSQL หรือ Oracle ตามรุ่นผลิตภัณฑ์ เหมาะกับธุรกิจที่มีข้อมูลมากและแอปพลิเคชันที่ต้องประมวลผลต่อเนื่อง</p></div>
+    <div class="feature"><h4>03 · AnalyticDB</h4><p>บริการฐานข้อมูลที่เน้นการวิเคราะห์ข้อมูลขนาดใหญ่และการประมวลผลเพื่อสนับสนุนการตัดสินใจ เช่น วิเคราะห์ยอดขาย พฤติกรรมลูกค้า สร้างรายงาน และประมวลผลข้อมูลจากหลายแหล่ง</p></div>
+  </div>
+  <h3>หลักการทำงานของ DaaS</h3>
+  <p>ผู้ใช้งานหรือแอปพลิเคชันส่งคำสั่งไปยังฐานข้อมูลบนคลาวด์ ระบบตรวจสอบคำสั่งและประมวลผล เช่น เพิ่มสินค้า แก้ไขข้อมูลลูกค้า ค้นหารายการสั่งซื้อ หรือลบข้อมูลที่ไม่จำเป็น จากนั้นส่งผลลัพธ์กลับไปยังแอปพลิเคชัน ฝั่งผู้ให้บริการมีเครื่องมือจัดการทรัพยากร ตรวจสอบประสิทธิภาพ สำรองข้อมูล และรักษาความปลอดภัยตามคุณสมบัติของบริการ</p>
+  <div class="pros-cons">
+    <div class="pc good"><h3>✓ ข้อดีของ DaaS</h3><ol><li>ลดความจำเป็นในการซื้อและติดตั้งเซิร์ฟเวอร์ฐานข้อมูล</li><li>ปรับขนาดทรัพยากรตามจำนวนผู้ใช้และปริมาณข้อมูลได้</li><li>ผู้ให้บริการรับผิดชอบโครงสร้างพื้นฐานและการบำรุงรักษาหลายส่วน</li><li>มีเครื่องมือควบคุมสิทธิ์ เข้ารหัส และจัดการเครือข่ายตามบริการ</li><li>ช่วยลดความเสี่ยงข้อมูลสูญหายเมื่อกำหนดนโยบายสำรองเหมาะสม</li><li>นำข้อมูลไปทำรายงาน วิเคราะห์แนวโน้ม และช่วยตัดสินใจได้</li><li>ใช้กับเว็บไซต์ แอปมือถือ ระบบซื้อขาย และระบบองค์กร</li></ol></div>
+    <div class="pc bad"><h3>! ข้อเสียของ DaaS</h3><ol><li>ต้องเชื่อมต่อเครือข่ายเพื่อเข้าถึงบริการ และค่าใช้จ่ายอาจเพิ่มตามทรัพยากร พื้นที่จัดเก็บ และปริมาณใช้งาน</li><li>ต้องกำหนดสิทธิ์และมาตรการความปลอดภัยให้เหมาะสม</li><li>การพึ่งพาเทคโนโลยีของผู้ให้บริการมากเกินไปอาจทำให้ย้ายฐานข้อมูลยาก ใช้เวลา และมีค่าใช้จ่ายเพิ่ม</li></ol></div>
+  </div>
+</section>
+
+<section class="section" id="security">
+  <div class="section-head"><div class="section-icon">🛡️</div><div><h2>6. Security & Identity</h2><p class="lead">ความปลอดภัยและการจัดการตัวตนดิจิทัล</p></div></div>
+  <h3>แนวคิด Zero Trust และการรักษาความปลอดภัยดิจิทัล</h3>
+  <p>Alibaba Cloud ให้ความสำคัญกับการรักษาความปลอดภัยของระบบคลาวด์ โดยสามารถประยุกต์ใช้แนวคิดสถาปัตยกรรมแบบ Zero Trust ซึ่งยึดหลักว่าไม่ควรเชื่อถือผู้ใช้งานหรืออุปกรณ์ใดโดยอัตโนมัติ ไม่ว่าจะเชื่อมต่อจากภายในหรือภายนอกเครือข่าย ทุกการเข้าถึงทรัพยากรจึงต้องผ่านการตรวจสอบตัวตนและสิทธิ์ที่เหมาะสม</p>
+  <p>แนวทางดังกล่าวให้ความสำคัญกับการจัดการตัวตนดิจิทัล (Digital Identity) การกำหนดสิทธิ์ (Authorization) การตรวจสอบกิจกรรม (Audit) การยืนยันตัวตน (Authentication) และการควบคุมการใช้งานแอปพลิเคชัน ควบคู่กับการจัดการคีย์ความปลอดภัย เพื่อจำกัดขอบเขตความเสียหายจากการเข้าถึงโดยไม่ได้รับอนุญาต</p>
+  <h3>โครงสร้างและบริการหลักด้าน IDaaS</h3>
+  <p>Identity as a Service (IDaaS) เป็นบริการสำหรับจัดการตัวตนและสิทธิ์การเข้าถึงในรูปแบบคลาวด์ ช่วยให้องค์กรบริหารบัญชีผู้ใช้จากส่วนกลาง ลดความซ้ำซ้อน และควบคุมสิทธิ์การใช้งานระบบต่าง ๆ ได้สะดวก</p>
+  <div class="feature-grid">
+    <div class="feature"><h4>Enterprise IAM (EIAM)</h4><p>บริการจัดการตัวตนและสิทธิ์การเข้าถึงสำหรับองค์กร ช่วยให้พนักงานเข้าสู่ระบบแอปพลิเคชันหลายรายการผ่าน Single Sign-On (SSO) และรองรับมาตรฐาน เช่น SAML 2.0, OpenID Connect (OIDC) และ OAuth 2.0 สามารถประยุกต์ใช้ Multi-Factor Authentication (MFA) เพื่อเพิ่มความปลอดภัย</p></div>
+    <div class="feature"><h4>User Directory & Provisioning</h4><p>กลไกจัดเก็บและบริหารบัญชีจากส่วนกลาง รวมถึงการสร้าง ปรับปรุง และยกเลิกสิทธิ์ตามสถานะบุคลากร เช่น รับพนักงานใหม่ เปลี่ยนแผนก หรือสิ้นสุดการจ้างงาน เพื่อลดความเสี่ยงจากบัญชีที่ยังมีสิทธิ์เกินจำเป็น</p></div>
+    <div class="feature"><h4>Privileged Access Management (PAM)</h4><p>แนวทางควบคุมบัญชีสิทธิ์สูง เช่น บัญชีผู้ดูแลระบบ โดยจำกัดสิทธิ์และระยะเวลาเท่าที่จำเป็น การให้สิทธิ์ชั่วคราวตามการใช้งานจริง (Just-in-Time Access: JIT) ช่วยลดความเสี่ยงจากการเก็บข้อมูลรับรองสิทธิ์สูงไว้ถาวร</p></div>
+    <div class="feature"><h4>ตัวตนของ AI Agents</h4><p>ควบคุมสิทธิ์ของตัวตนที่ไม่ใช่มนุษย์ เช่น โปรแกรมอัตโนมัติและ AI Agents ให้เหมาะกับภารกิจ รวมถึงจัดเก็บและปกป้อง API Keys ผ่านระบบจัดการกุญแจเข้ารหัส เช่น Key Management Service (KMS)</p></div>
+  </div>
+  <div class="callout"><b>ข้อควรตรวจสอบ:</b> ชื่อผลิตภัณฑ์ ความพร้อมใช้งาน และรายละเอียดฟังก์ชันด้าน IAM/PAM อาจแตกต่างกันตามภูมิภาคและรุ่นบริการ ควรตรวจสอบเอกสารทางการของ Alibaba Cloud ก่อนนำไปใช้งานจริง</div>
+</section>
+
+<section class="section" id="comparison">
+  <div class="section-head"><div class="section-icon">📊</div><div><h2>ตารางเปรียบเทียบบริการคลาวด์</h2><p class="lead">สรุปความแตกต่างเพื่อช่วยเลือกบริการให้เหมาะกับงาน</p></div></div>
+  <div style="overflow-x:auto">
+  <table class="compare">
+    <thead><tr><th>รูปแบบ</th><th>สิ่งที่ให้บริการหลัก</th><th>ผู้ใช้ดูแลอะไรเป็นหลัก</th><th>ตัวอย่าง Alibaba Cloud</th></tr></thead>
+    <tbody>
+      <tr><td><b>IaaS</b></td><td>เซิร์ฟเวอร์เสมือน เครือข่าย และพื้นที่จัดเก็บ</td><td>ระบบปฏิบัติการ ซอฟต์แวร์ และการตั้งค่าระบบ</td><td>ECS</td></tr>
+      <tr><td><b>CaaS</b></td><td>การรันและจัดการคอนเทนเนอร์</td><td>คอนเทนเนอร์ แอปพลิเคชัน การตั้งค่าและความปลอดภัยตามบริการ</td><td>ACS, ACK</td></tr>
+      <tr><td><b>PaaS</b></td><td>แพลตฟอร์มสำหรับพัฒนาและติดตั้งแอป</td><td>โค้ด ข้อมูล และการตั้งค่าของแอป</td><td>SAE (และบริการแพลตฟอร์มที่เกี่ยวข้อง)</td></tr>
+      <tr><td><b>FaaS</b></td><td>เรียกใช้ฟังก์ชันตามเหตุการณ์หรือคำขอ</td><td>โค้ด ฟังก์ชัน เหตุการณ์ และสิทธิ์การเข้าถึง</td><td>Function Compute (FC)</td></tr>
+      <tr><td><b>DaaS</b></td><td>ฐานข้อมูลบนคลาวด์</td><td>ข้อมูล การเข้าถึง การออกแบบและการใช้งานฐานข้อมูล</td><td>ApsaraDB RDS, PolarDB, AnalyticDB</td></tr>
+      <tr><td><b>IDaaS / Identity</b></td><td>ตัวตนดิจิทัลและสิทธิ์การเข้าถึง</td><td>นโยบายบัญชี สิทธิ์ และการตรวจสอบการใช้งาน</td><td>บริการ IAM/Identity ตามผลิตภัณฑ์ที่เปิดให้ใช้</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="lead">หมายเหตุ: ขอบเขตความรับผิดชอบและการจัดประเภทบริการอาจแตกต่างกันตามผลิตภัณฑ์ รุ่น และรูปแบบการตั้งค่า ควรอ้างอิงเอกสารทางการเมื่อใช้งานจริง</p>
+</section>
+
+<section class="section" id="authors">
+  <div class="section-head"><div class="section-icon">👥</div><div><h2>ผู้จัดทำ</h2><p class="lead">รายชื่อสมาชิกผู้จัดทำเว็บไซต์และเนื้อหา</p></div></div>
+  <div class="people">
+    <div class="person"><strong>นาย นิรุตย์ ปัญญาใส</strong><span>รหัสนิสิต 67010918010</span></div>
+    <div class="person"><strong>นางสาว มัทนา สุระชัย</strong><span>รหัสนิสิต 67010918088</span></div>
+    <div class="person"><strong>นางสาว ญาณิศา ต้นลำภู</strong><span>รหัสนิสิต 67010918099</span></div>
+    <div class="person"><strong>นางสาว นารา โครตบุญมา</strong><span>รหัสนิสิต 67010918104</span></div>
+    <div class="person"><strong>นางสาว สุภาดา แก้ววิเศษ</strong><span>รหัสนิสิต 67010918108</span></div>
+  </div>
+</section>
+<section class="section" id="course">
+  <div class="section-head"><div class="section-icon">🎓</div><div><h2>รายวิชาและอาจารย์ผู้สอน</h2><p class="lead">ข้อมูลประกอบการเรียน</p></div></div>
+  <div class="course-meta">
+    <div class="meta-box"><b>รายวิชา</b>เทคโนโลยีการประมวลผลแบบคลาวด์</div>
+    <div class="meta-box"><b>อาจารย์ผู้สอน</b>อาจารย์ ดร.อิทธิพล เอี่ยมภูงา</div>
+  </div>
+</section>
+<footer class="footer">Cloud Computing · Alibaba Cloud Learning Hub<br>จัดทำเพื่อประกอบการศึกษา</footer>
+</main>
+</div>
+<button class="backtop" id="backTop" aria-label="กลับขึ้นด้านบน">↑</button>
+<script>
+const sidebar=document.getElementById('sidebar');
+document.getElementById('menuBtn').addEventListener('click',()=>sidebar.classList.toggle('show'));
+document.querySelectorAll('.nav-toggle').forEach(button=>button.addEventListener('click',()=>button.parentElement.classList.toggle('open')));
+document.querySelectorAll('.nav-link').forEach(link=>link.addEventListener('click',()=>{
+  document.querySelectorAll('.nav-link').forEach(x=>x.classList.remove('active'));
+  link.classList.add('active');
+  sidebar.classList.remove('show');
+}));
+document.getElementById('themeBtn').addEventListener('click',()=>document.body.classList.toggle('dark'));
+const backTop=document.getElementById('backTop');
+window.addEventListener('scroll',()=>backTop.classList.toggle('show',window.scrollY>450));
+backTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+document.getElementById('navSearch').addEventListener('input',function(){
+  const q=this.value.trim().toLowerCase();
+  document.querySelectorAll('.sidebar .nav-link').forEach(link=>{
+    link.style.display=link.textContent.toLowerCase().includes(q)?'flex':'none';
+  });
+  document.querySelectorAll('.nav-group').forEach(group=>{
+    const visible=[...group.querySelectorAll('.nav-link')].some(link=>link.style.display!=='none');
+    group.style.display=(!q||visible)?'block':'none';
+    if(q&&visible)group.classList.add('open');
+  });
+});
+</script>
+</body>
+</html>
